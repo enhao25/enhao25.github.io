@@ -31,6 +31,15 @@
     		font-size: 48px;
     		margin: 0px 0 50px 0;
     	}
+        #coming_soon_id{
+            margin-top: 70px;
+        }
+        @media(max-width:991px){
+            #enhao_image_id{width: 100%;}
+            #coming_soon_id{
+                margin-top: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -88,7 +97,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 about-image wow fadeInUp" data-wow-delay="0.4s">
-                    <img src="images/enhao.jpg">
+                    <img id="enhao_image_id" src="images/enhao.jpg">
                 </div>
                 <div class="col-md-6 about-text wow fadeInUp" data-wow-delay="0.8s">
                     <div class="out">
@@ -196,24 +205,26 @@
                     <p> You may know my name, but not my story. <br> Have a look at what I have done before! </p>
                 </div>
                 <!-- projects -->
-                <!--
-                <div class="row">
-                    <a href="single-project.html" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 project-content wow fadeInUp" data-wow-delay="0.4s">
+                
+                <div class="row" style="text-align: center;">
+                    <!-- <a href="single-project.html" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 project-content wow fadeInUp" data-wow-delay="0.4s">
                         <div class="project-image">
                             <img src="images/project-1.png">
                         </div>
                         <h1>By spite about do of do allow blush</h1>
                         <p>Quick six blind smart out burst. Perfectly on furniture dejection determine my depending an to. Add short water court fat.  </p>
                         <span class="project-info">Larry Stark - 7 September 2016 </span>
-                    </a>
-                    <a href="single-project.html" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 project-content wow fadeInUp" data-wow-delay="0.6s">
+                    </a> -->
+                    
+                    <a href="bmi.html" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 project-content wow fadeInUp" data-wow-delay="0.6s">
                         <div class="project-image">
-                            <img src="images/project-2.png">
+                            <img src="images/weighting_scale.png" alt="weighting_scale" height="96" width="96">
                         </div>
-                        <h1>Two Before Arrow Not Relied</h1>
-                        <p>Quick six blind smart out burst. Perfectly on furniture dejection determine my depending an to. Add short water court fat.  </p>
-                        <span class="project-info">Larry Stark - 7 September 2016 </span>
+                        <h1>BMI Caculator</h1>
+                        <p>Wondering what you BMI?? Instead of calculating it yourself, why not use this platform to do it for you?</p>
+                        <span class="project-info">Enhao - May 2018</span>
                     </a>
+                    <!--
                     <a href="single-project.html" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 project-content wow fadeInUp" data-wow-delay="0.8s">
                         <div class="project-image">
                             <img src="images/project-3.png">
@@ -221,10 +232,12 @@
                         <h1>Behind Sooner Dining so Window </h1>
                         <p>Quick six blind smart out burst. Perfectly on furniture dejection determine my depending an to. Add short water court fat.  </p>
                         <span class="project-info">Larry Stark - 7 September 2016 </span>
-                    </a>
-                </div>-->
-                <h1 id='coming'>COMING SOON!</h1>
-                <a href="../Websites/testing.html" class="site-button"> READ MORE</a>
+                    </a>-->
+                    <div id="coming_soon_id" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <h1 id='coming'>COMING SOON!</h1>
+                        <a href="../Websites/testing.html" class="site-button"> READ MORE</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -246,7 +259,8 @@
                 </div> <!-- information end -->
                 <!--Contact Form-->
                 <div class="col-md-8 col-md-offset-2 wow fadeInUp" data-wow-delay="1s">
-                    <form class="col-md-12 contact-form" method="POST" action="https://formspree.io/larloller@gmail.com">
+                    <!-- <form class="col-md-12 contact-form" method="POST" action="https://formspree.io/larloller@gmail.com"> -->
+                    <form class="col-md-12 contact-form" method="POST" action="../Websites/mail.py">
                         <div class="row">
                             <!--Name-->
                             <div class="col-md-6">

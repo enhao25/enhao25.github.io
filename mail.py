@@ -25,3 +25,5 @@ server.starttls()
 server.login('larlollers@gmail.com', 'Kingkong1')
 server.sendmail(FROM, TO, message)
 server.quit()
+
+return
