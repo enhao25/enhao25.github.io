@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Meta Tag -->
+    <title>Enhao | Web Developer</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Enhao | Web Developer">
+    <meta name="keywords" content="personal, portfolio, enhao, web developer, enhaotech">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link  -->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-30 p-b-20">
+				<form class="login100-form validate-form" method="POST" onsubmit="return false">
+					<span class="login100-form-title">
+						Register
+					</span>
+
+					<div class="wrap-input100 validate-input m-t-60 m-b-35" data-validate = "Enter email">
+						<input id="form_email" class="input100" type="email" name="email">
+						<span class="focus-input100" data-placeholder="Email"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter Name">
+						<input id="form_name" class="input100" type="text" name="name">
+						<span class="focus-input100" data-placeholder="Name"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+						<input id="form_pass" class="input100" type="password" name="pass">
+						<span class="focus-input100" data-placeholder="Password"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button id="sign_up" class="login100-form-btn">
+							Sign Up
+						</button>
+					</div>
+
+					<ul class="login-more p-t-20">
+						<li>
+							<a href="../Financial Calculator/index.html" class="txt2">
+								Login
+							</a>
+						</li>
+						<li class="m-b-8">
+							<span class="txt1">
+								Forgot
+							</span>
+
+							<a id="forget_pass" href="../Financial Calculator/forget_pass.html" class="txt2">
+								Password?
+							</a>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyAwdzVPCDtlLpT1394sOMR3rdKKcqg-Nb8",
+			authDomain: "financial-calculator-ec1d4.firebaseapp.com",
+			databaseURL: "https://financial-calculator-ec1d4.firebaseio.com",
+			projectId: "financial-calculator-ec1d4",
+			storageBucket: "financial-calculator-ec1d4.appspot.com",
+			messagingSenderId: "1052613274531"
+		};
+		firebase.initializeApp(config);
+	</script>
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<script src="js/main.js"></script>
+	<script>
+			
+		// User Sign Up
+		$("#sign_up").click(function(){
+
+			// Define variables
+			var email = $("#form_email").val(),
+				password = $("#form_pass").val()
+				results = "success"	
+			// Create account in firebase
+			firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+				
+				// Handle Errors here.
+				var errorCode = error.code,
+					errorMessage = error.message
+				// Change results value to fail
+				results = "fail"
+				alert(errorCode);
+
+			}).then(function(){
+				
+				// Action when the user successfully created an account
+				if (results == "success"){
+					alert("You have successfully created an account with us! Do proceed to the login page!")
+					// $(location).attr('href', '../Financial Calculator/index.html')
+					// Update Additional Information
+					var user = firebase.auth().currentUser;
+
+					user.updateProfile({
+						displayName : $("#form_name").val()
+					}).then(function() {
+						// Update successful.
+						console.log("update successful")
+					}).catch(function(error) {
+						// An error happened.
+						var errorCode = error.code,
+							errorMessage = error.message
+						alert(errorCode);
+					})
+				}
+			});
+		});
+
+		// Function for forget user
+		$("#forget_pass").click(function(){
+			// $(location).attr('href', '../Financial Calculator/index.html')
+		});
+	</script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <title>Enhao | Web Developer</title>
     <meta charset="UTF-8">
-    <meta name="description" content="Enhao | Web Developer">
+    <meta name="description" content="Low En Hao, 22 years old, learnt web development for 4 years. I know how to program, HTML, CSS, Javascript, Python and MongoDB. Do check my website or contact me to know more about me or if you have any job offer.">
     <meta name="keywords" content="personal, portfolio, enhao, web developer, enhaotech">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
@@ -259,7 +259,7 @@
                 <!--Contact Form-->
                 <div class="col-md-8 col-md-offset-2 wow fadeInUp" data-wow-delay="1s">
                     <!-- <form class="col-md-12 contact-form" method="POST" action="https://formspree.io/larloller@gmail.com"> -->
-                    <form class="col-md-12 contact-form" method="POST" action="../Websites/mail.py">
+                    <form id="user_form" class="col-md-12 contact-form" method="POST" onsubmit="return false">
                         <div class="row">
                             <!--Name-->
                             <div class="col-md-6">
@@ -271,7 +271,7 @@
                             </div>
                             <div class="col-md-12">
                                 <!--Message-->
-                                <textarea name="con_message" id="message" class="requie" placeholder="Message" rows="8"></textarea required>
+                                <textarea name="con_message" id="con_message" class="requie" placeholder="Message" rows="8"></textarea required>
                                 <input id="con_submit" class="site-button" type="submit" value="Send">
                             </div>
                         </div>
@@ -293,6 +293,22 @@
         </div>
     </footer>
 
+    <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+        apiKey: "AIzaSyAWhr2LapRtr7wB95J_skycpeFBrWvQT-A",
+        authDomain: "personal-website-25e74.firebaseapp.com",
+        databaseURL: "https://personal-website-25e74.firebaseio.com",
+        projectId: "personal-website-25e74",
+        storageBucket: "",
+        messagingSenderId: "225315319933"
+        };
+        firebase.initializeApp(config);
+    </script>
+
     <!-- Javascripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><!-- jQuery library -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -308,6 +324,43 @@
       animation: 'fade',
       play: 3000
     });
+
+    // Run functions
+    // get_data();
+
+    $("#con_submit").click(function(){
+        // Check if the fields are blank
+        if (!$('#con_name').val() || !isEmail($('#con_email').val()) || !$('#con_message').val()) {
+            // If one or more fields are blank
+            alert("Seems like u missed a field or 2, or maybe has a wrong email format? Do complete the form before sending it to us! I am very busy you know! :)")
+            console.log("error")
+        }
+        else{
+            // If all fields are fielded up
+            // Firebase storing of data
+            firebase.database().ref('users/' + $("#con_name").val()).set({
+                name: $("#con_name").val(),
+                email: $("#con_email").val(),
+                message: $("#con_message").val()
+            });
+            alert("You have successful sent a message to the author! Keep a lookout for my reply to you!")
+        }
+    });
+    
+    // Function to check if the input is in email format
+    function isEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+    };
+    
+    // Function for getting firebase data
+    function get_data(){
+        var ref = firebase.database().ref('users/')
+        ref.on('value', function(snapshot){
+            snapshot.val()
+        })
+    }
+    
     </script>
 
 </body>

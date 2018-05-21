@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<head>
+    <!-- Meta Tag -->
+    <title>Enhao | Web Developer</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Enhao | Web Developer">
+    <meta name="keywords" content="personal, portfolio, enhao, web developer, enhaotech">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link  -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+    <link href="../css/dashboard.css" rel="stylesheet">
+    <link href="../css/radio.css" rel="stylesheet">
+    
+    <style>
+        /*CSS Styling*/
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+        }
+        .form-group{
+            margin-bottom: 20px;
+        }
+        .error_msg{
+            color: red; 
+            display: none;
+        }
+        .tb_field{
+            height: 2.4em;
+            font-size: 1.2em;
+        }
+        /*Submit btn*/
+        #submit_btn{
+            width:100%; 
+            margin-bottom: 10px; 
+            background-color: #1fa6a8; 
+            color: white;
+            font-size: 1.5em;
+        }
+        #submit_btn:hover{
+            border:1.5px solid green;
+        }
+        /*Top right logout button*/
+        #logout_btn{
+        	padding: 10px;
+        	margin-top: 5px;
+        	width: 11em;
+        	position: absolute;
+        	right: 40px;
+        }
+        /*Change the height for select2 container*/
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+			line-height: 40px;
+		}
+		.select2-container--default .select2-selection--single{
+			height: 40px !important;
+		}
+        @media (max-width:900px){
+            h2{font-size: 1.8em;}
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Body content -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid" style="background-color: #1fa6a8;">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../Financial Calculator/home.html" style="color:white;">Home</a>
+                <button id="logout_btn" class="btn btn-default">Log out</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main">
+                <h1 class="page-header" style="text-align: center;">User Income Calculator</h1>
+                <form class="form-horizontal" id="bmi_form" onsubmit="return false" >
+                    <!-- Row 1 -->
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label class="control-label col-sm-2 col-sm-offset-2" for="income">Income Amount</label>
+                        <div class="col-sm-6"> 
+                            <div class="input-group"> 
+                            	<span class="input-group-addon">$</span>
+                                <input value="1000" class="form-control tb_field" id="income" name="income" type="number" >
+                            </div>
+                            <span id="loan_amt_error" class="error_msg">Please enter a valid loan amount</span>
+                        </div>
+                    </div>
+                    <!-- Row 2 -->
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label class="control-label col-sm-2 col-sm-offset-2" for="income_cat" id="height_text">Income Category</label>
+                        <div class="col-sm-6"> 
+                            <div class="input-group" style="width: 100%">
+                                <select id="income_cat" class="form-control tb_field" name="income_cat"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row 3 -->
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label class="control-label col-sm-2 col-sm-offset-2" for="income_date" id="height_text">Date</label>
+                        <div class="col-sm-6"> 
+                            <div class="input-group" style="width: 100%">
+                                <input class="form-control tb_field" id="income_date" name="income_date" type="date" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-sm-push-6">
+                        <button id="submit_btn" type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script for Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyAwdzVPCDtlLpT1394sOMR3rdKKcqg-Nb8",
+			authDomain: "financial-calculator-ec1d4.firebaseapp.com",
+			databaseURL: "https://financial-calculator-ec1d4.firebaseio.com",
+			projectId: "financial-calculator-ec1d4",
+			storageBucket: "financial-calculator-ec1d4.appspot.com",
+			messagingSenderId: "1052613274531"
+		};
+		firebase.initializeApp(config);
+	</script>
+
+    <!-- Javascript Scripts or other scripts links -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <!-- Change to currency format -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+	<script>
+
+		var name, uid
+
+		// Check the status of the user and get the user's data from firebase
+		firebase.auth().onAuthStateChanged(function(user) {
+
+			if (user) {
+				// User is signed in.
+				var user = firebase.auth().currentUser;
+
+				if (user != null) {
+					name = user.displayName
+					uid = user.uid
+				}
+				console.log(name)
+			} else {
+				// No user is signed in.
+				$(location).attr('href', '../Financial Calculator/index.html')
+			}
+		});
+
+		// Logout button
+		$("#logout_btn").click(function(){
+			firebase.auth().signOut().then(function() {
+				console.log('Signed Out');
+			}, function(error) {
+				console.error('Sign Out Error', error);
+			});
+		});
+
+		// Set the date field to today's date
+		$("#income_date").val(today_date())
+
+		// Save user submitted data
+		$("#submit_btn").click(function(){
+			var newKey = firebase.database().ref().child('users').push().key;
+			firebase.database().ref('users/' + uid + "/" + newKey).set({
+                income_amt: $("#income").val(),
+                income_cat: cat_data[$("#income_cat").val()]['text'],
+                income_date: $("#income_date").val()
+            }).then(function() {
+            	alert("Your income data has been submitted to the database!")
+            });
+		});
+
+		// Get today's date
+		function today_date(){
+			var date = new Date();
+
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            return(year + "-" + month + "-" + day)  
+		}
+
+		var cat_data = [{ "id" : "0", "text" : 'Salary' }, { "id" : "1", "text" : 'Insurance' }, { "id" : "2", "text" : 'Investment' }, { "id" : "3", "text" : 'Business' }, { "id" : "4", "text" : 'Others' }]
+
+		$("#income_cat").select2({
+			data: cat_data,
+			minimumResultsForSearch: Infinity
+		});
+
+		// Get the category for select2 dropdown list
+		function get_cat(){
+			$("#income_cat").select2({
+				data: cat_data,
+				minimumResultsForSearch: Infinity
+			});
+		}
+		
+	</script>
+
+</body>
+</html>
