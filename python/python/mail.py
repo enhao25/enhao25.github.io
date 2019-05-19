@@ -1,6 +1,6 @@
 import smtplib
 
-FROM = 'abc'
+FROM = 'larloller@gmail.com'
 
 TO = ["larloller@gmail.com"] # must be a list
 
@@ -22,8 +22,6 @@ Subject: %s
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
-server.login('larlollers@gmail.com', 'Kingkong1')
+server.login('larloller@gmail.com', 'Kingkong1')
 server.sendmail(FROM, TO, message)
 server.quit()
-
-return

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Meta Tag -->
+    <title>Enhao | Web Developer</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Enhao | Web Developer">
+    <meta name="keywords" content="personal, portfolio, enhao, web developer, enhaotech">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link  -->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+				<form class="login100-form validate-form" method="POST" onsubmit="return false">
+					<span class="login100-form-title">
+						Forget Password
+					</span>
+
+					<div class="wrap-input100 validate-input m-t-50 m-b-60" data-validate = "Enter email">
+						<input id="form_email" class="input100" type="text" name="Email">
+						<span class="focus-input100" data-placeholder="Email"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button id="send_btn" class="login100-form-btn">
+							Send Email to myself
+						</button>
+					</div>
+
+					<ul class="login-more p-t-20">
+						<li>
+							<a href="../Financial Calculator/index.html" class="txt2">
+								Login
+							</a>
+						</li>
+						<li>
+							<span class="txt1">
+								Don’t have an account?
+							</span>
+
+							<a href="../Financial Calculator/sign_up.html" class="txt2">
+								Sign up
+							</a>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyAwdzVPCDtlLpT1394sOMR3rdKKcqg-Nb8",
+			authDomain: "financial-calculator-ec1d4.firebaseapp.com",
+			databaseURL: "https://financial-calculator-ec1d4.firebaseio.com",
+			projectId: "financial-calculator-ec1d4",
+			storageBucket: "financial-calculator-ec1d4.appspot.com",
+			messagingSenderId: "1052613274531"
+		};
+		firebase.initializeApp(config);
+	</script>
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<script src="js/main.js"></script>
+	<script>
+
+		// User Login
+		$("#send_btn").click(function(){
+			
+			// Define Variable
+			var email = $("#form_email").val(),
+				results = "success"
+			
+			// Firebase rest password
+			firebase.auth().sendPasswordResetEmail(email).catch(function(error) {
+				// Handle Errors here.
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				results = "failure"
+				console.log(errorCode)
+				console.log(errorMessage)
+			}).then(function(){
+				// Action when user has successfully login
+				if (results == "success"){
+					// $(location).attr('href', '../Financial Calculator/index.html')
+					alert("An email has been sent to " + email + " to reset your password.")
+				}
+			});
+		})
+	</script>
+
+</body>
+</html>
